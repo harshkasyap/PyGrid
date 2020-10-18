@@ -4,7 +4,9 @@ import jwt
 import pytest
 from flask import current_app as app
 
-from src.main.database import Role, User, create_role, create_user, model_to_json
+from src.main.database.role import create_role
+from src.main.database.user import create_user
+from src.main.database.utils import model_to_json
 
 payload = {
     "name": "mario mario",

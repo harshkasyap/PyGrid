@@ -18,7 +18,10 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_sockets import Sockets
 from geventwebsocket.websocket import Header
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils.functions import database_exists
+
+db = SQLAlchemy()
 
 # Internal imports
 from main.utils.monkey_patch import mask_payload_fast
@@ -30,10 +33,10 @@ from main.routes import (
     infrastructure_blueprint,
     root_blueprint,
 )
-
+from main.database.role import Role
+from main.database.user import User
 import config
 
-db = SQLAlchemy()
 DEFAULT_SECRET_KEY = "justasecretkeythatishouldputhere"
 
 # Masking/Unmasking is a process used to guarantee some level of security
@@ -118,7 +121,7 @@ def seed_db():
     db.session.commit()
 
 
-def create_app(debug=False, secret_key=DEFAULT_SECRET_KEY) -> Flask:
+def create_app(debug=False, secret_key=DEFAULT_SECRET_KEY, db_config=None) -> Flask:
     """This method creates a new Flask App instance and attach it with some
     HTTP/Websocket bluetprints.
 
@@ -170,3 +173,5 @@ def create_app(debug=False, secret_key=DEFAULT_SECRET_KEY) -> Flask:
 
     # Send app instance
     return app
+
+

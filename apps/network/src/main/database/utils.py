@@ -1,4 +1,4 @@
-from .. import db
+from app import db
 from .user import User
 from .role import Role
 

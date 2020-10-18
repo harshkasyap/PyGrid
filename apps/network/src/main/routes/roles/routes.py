@@ -17,7 +17,8 @@ from app import db
 from .blueprint import roles_blueprint as roles_route
 from ..auth import error_handler, token_required_factory
 from .role_ops import create_role, get_role, get_all_roles, put_role, delete_role
-from ...database import Role, User
+from ...database.role import Role
+from ...database.user import User
 from ...database.utils import model_to_json
 
 
