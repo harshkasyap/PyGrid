@@ -95,7 +95,7 @@ def new_job(self, model_name, model_version) -> FLJob:
         return job
 
 def create_client_and_run_cycle():
-    client = FLClient(url=gridAddress, auth_token=auth_token, verbose=True)
+    client = FLClient(url=gridAddress, auth_token=None, verbose=True)
     client.worker_id = client.grid_worker.authenticate(client.auth_token,model_name,model_version)["data"]["worker_id"]
     job = client.new_job(model_name, model_version)
 
